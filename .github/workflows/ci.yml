@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   sanity:
     runs-on: ubuntu-latest
@@ -30,3 +33,14 @@ jobs:
 
       - name: Compile check
         run: python -m py_compile main.py storage.py
+
+      - name: Bot Heartbeat Commit
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
+        run: |
+          mkdir -p .github
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/actions-heartbeat.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/actions-heartbeat.txt
+          git commit -m "ci: actions heartbeat check" || exit 0
+          git push
