@@ -128,6 +128,61 @@ class SetupModal(discord.ui.Modal, title="Resinly Setup"):
             ephemeral=True,
         )
 
+# help embed builder helper
+def build_cookie_help_embed() -> discord.Embed:
+    # create embed field
+    embed = discord.Embed(
+        title="How to find your HoYoLab cookies",
+        description=(
+            "You need two cookie values from your signed-in HoYoLab browser session: "
+            "`ltuid_v2` and `ltoken_v2`"
+        ),
+        color=discord.Color.gold(),
+    )
+    
+    # Chrome
+    embed.add_field(
+        name="Chrome / Edge",
+        value=(
+            "1. Sign in to HoYoLab in your browser. \n"
+            "2. Open the HoYoLab site. \n"
+            "3. Press `F12`. \n"
+            "4. Open the `Application` tab (press `>>` or `+` if not seen). \n"
+            "5. Open `Cookies` in the left sidebar. \n"
+            "6. Select the HoYoLab site. \n"
+            "7. Find `ltuid_v2` and `ltoken_v2` \n"
+            "8. Copy their values into the setup form."
+        ),
+        inline=False,
+    )
+    
+    # Firefox
+    embed.add_field(
+        name="Firefox",
+        value=(
+            "1. Sign in to HoYoLab in your browser. \n"
+            "2. Press `F12`. \n"
+            "3. Open the `Storage` tab. \n"
+            "4. Open `Cookies` in the left sidebar. \n"
+            "5. Select the HoYoLab site. \n"
+            "6. Find `ltuid_v2` and `ltoken_v2` \n"
+            "7. Copy their values into the setup form."
+        ),
+        inline=False,
+    )
+    
+    # Safety
+    embed.add_field(
+        name="Safety",
+        value=(
+            "Treat these like passwords. Only submit them through Resinly's private setup flow. "
+            "If you think they were exposed, log out of HoYoLab and sign back in."
+        ),
+        inline=False,
+    )
+     
+    return embed
+
 class SetupView(discord.ui.View):
     @discord.ui.button(label="Open Secure Setup Form", style=discord.ButtonStyle.primary)
     async def open_setup(self, interaction: discord.Interaction, button: discord.ui.Button):
