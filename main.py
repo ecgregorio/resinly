@@ -85,9 +85,21 @@ async def on_ready():
 
 ### --- Modal Form --- ###
 class SetupModal(discord.ui.Modal, title="Resinly Setup"):
-    uid = discord.ui.TextInput(label="UID (9 digits)", required=True, max_length=9)
-    ltuid = discord.ui.TextInput(label="ltuid_v2", required=True)
-    ltoken = discord.ui.TextInput(label="ltoken_v2", required=True)
+    uid = discord.ui.TextInput(
+        label="Genshin UID", 
+        placeholder="Your 9-digit in-game UID",
+        required=True, 
+        max_length=9,
+    )
+    ltuid = discord.ui.TextInput(
+        label="ltuid_v2", required=True,
+        placeholder="Copy from your HoYoLab browser cookies",
+    )
+    ltoken = discord.ui.TextInput(
+        label="ltoken_v2", required=True,
+        placeholder="Copy from your HoYoLab browser cookies",
+        style=discord.TextStyle.paragraph, # make it so the text doesn't cut off (too long cant see)
+    )
     
     async def on_submit(self, interaction: discord.Interaction) -> None:
         uid_value = str(self.uid).strip()
