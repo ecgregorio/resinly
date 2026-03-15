@@ -1,11 +1,9 @@
-import discord
-from discord.ext import tasks, commands
+from discord.ext import tasks
 import os
 
 from storage.storage import (
     load_subscriptions,
     save_subscriptions,
-    encrypt_value,
     decrypt_value,
     build_genshin_client,
 )

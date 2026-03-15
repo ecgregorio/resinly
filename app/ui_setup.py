@@ -7,10 +7,6 @@ from storage.storage import (
     encrypt_value,
 )
 
-from app.bot_core import (
-    bot
-)
-
 # Consts
 COOKIE_GUIDE_URL = "https://github.com/ecgregorio/resinly#finding-your-hoyolab-cookies"
 
